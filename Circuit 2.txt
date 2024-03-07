@@ -1,1 +1,0 @@
-INPUTS:ABCDCOMPONENTS:G0, NOT, w0, BG1, NOT, w1, CG2, AND2, w2, A, BG3, AND2, w3, w0, w1G4, OR2, w4, C, DG5, NOR2, w5, w2, w3G6, NAND2, w6, w4, w5
