@@ -1,0 +1,11 @@
+INPUTS:
+A
+B
+C
+COMPONENTS:
+G0, NOR2, W0, A, B
+G1, NOT, W1, C
+G2, NAND2, W2, W0, W1
+
+
+
