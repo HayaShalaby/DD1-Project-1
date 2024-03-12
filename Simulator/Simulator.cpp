@@ -1,5 +1,6 @@
 #include "Component.h"
 
+// ## HAYA BEGIN
 // Input Library Path
 // Read the library file
 // Store contents in Library "as 2D array"
@@ -7,9 +8,11 @@
 //   Library has : gateType, inputsNum, outputExpressions, delay
 
 // Write a stack function that translates the expression & | ~
+//## HAYA END
 
-// ### Create a class / struct called 'Components'
-// ###  Name, Type, Output, Inputs[list of structs]
+//## YASMINA BEGIN
+// Create a class / struct called 'Components'
+// Name, Type, Output, Inputs[list of structs]
 
 // struct A { 
 //    "Value": 0
@@ -17,7 +20,9 @@
 	// A["Value"] = 1
 	// print(A["Value"])
 
+// ## YASMINA END
 
+//##YASMINA START
 	// Create a class / struct called 'Circuit'
 	//    it has inputs[], Gates[], 
 	//		as function that gets a log and returns it to main program
@@ -28,8 +33,12 @@
 		// Read Circuit from File and update the data and send the log to the main file
 		// Create gate instances/objects
 
-		// Log file 2D array:
-//  Input, components
+
+
+		// Log file vector<vector>:
+//  Input, components[]
+//##YASMINA END
+
 
 // // // // KEEP TRACK OF TIME // // // //
 // // // At the beginning all wires and inputs are set to zero
@@ -37,7 +46,10 @@
 // Input Stimuli Path
 
 
-// Read stimuli file and Create a list of objects "name" of the format[time, signalName, value]
+//## DOES NOT MAKE SENSE OUR MINHEAP EXPERT RANA WILL FIX IT WITH A MIN HEAP
+// while loop till minheap size = 0
+// 
+// // Read stimuli file and Create a list of objects "name" of the format[time, signalName, value]
 // Loop increment by 50 ps
 //    until reaches time in the first input
 //    checks the log for the value of the input
@@ -56,7 +68,7 @@
 
 //       Output it to file
 
-//  GUI
+//  GUIs
 
 // Note to self : always try to use data structure we learned
 
