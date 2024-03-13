@@ -36,7 +36,7 @@ void Circuit::readCircuit(string fileName)
 
 }
 
-//takes string input, parses it then populates and adds it to the circuit
+//takes string input, parses it then populates a gate and adds it to the circuit
 void Circuit::populateComponent(string & parseInput)
 {
 	//vector to store parsed substrings
@@ -44,21 +44,21 @@ void Circuit::populateComponent(string & parseInput)
 	//vector to store the inputs
 	vector<Signal> compInputs;
 
-	//variable to hold position of /'/
+	//variable to hold position of /,/
 	int pos;
 
-	//while string is not empty, get position of /'/
+	//while string is not empty, get position of /,/
 	while (pos = temp.find(',') != string::npos)
 	{
 		//push onto the values vector the substring
 		values.push_back(parseInput.substr(0, pos));
 		//delete the substring
-		parseInput.erase(0, pos + 1);
+		parseInput.erase(0, pos + 2);
 	}
 
 	//store the inputs (4th value and onwards) in a vector to be sent to the component
 	for(auto it = values.begin()+3; it= values.end(); it++)
-		compInputs.push_back(Signal(it*));
+		compInputs.push_back(Signal{ it* });
 
 	//get delay from library and put it in int delay
 	//maybe static function for that?
@@ -96,7 +96,7 @@ void Circuit::setInput(int index, const Signal& signal)
 			S.value = signal.value;
 		}
 	}
-};
+}
 
 //function that returns the index of a gate and a signal and modifies the value of the gate Output
 void Circuit::setOutput(int index, const Signal& signal)

@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//figure out how to set inputs to gate initially to zerp
 struct Signal {
 	string name;
 	bool value;
@@ -29,7 +30,6 @@ class Circuit {
 		int delay;
 		Signal output;
 		vector<Signal> inputs;
-
 	};
 
 	//Do we even need the vector of inputs?
