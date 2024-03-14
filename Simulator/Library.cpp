@@ -239,7 +239,7 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
 //    }
 //}
 
-bool logicChange(int index) {
+bool Library::logicChange(int index) {
     string libFile;
     Library lib(libFile);
 
