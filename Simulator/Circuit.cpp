@@ -67,12 +67,8 @@ void Circuit::populateComponent(string & parseInput)
 		compInputs.push_back(Signal{ *it });
 	}
 
-	//get delay from library and put it in int delay
-	//maybe static function for that?
-	//for now declare 
-	//2 issues: 1 not static, 2 don't receive it as an object and have to declare here
-	Library myLib(libPath);
-	int delay = myLib.getDelay(values[1]);
+	//dummy value for delay
+	int delay = 0;
 
 	//create component using the name, type, delay, output and vector of inputs
 	Gates.push_back({ values[0], values[1], delay, { values[2]}, compInputs });
