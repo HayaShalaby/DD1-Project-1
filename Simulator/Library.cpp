@@ -243,15 +243,16 @@ bool logicChange(int index){
     Library lib(libFile);
 
     string circFile;
-    Circuit currCirc(circFile, libFile);
+    Circuit currCirc(circFile);
     string gateType = currCirc.getType(index);
     vector<Signal> inputs= currCirc.getInputs(index);
     Signal output = currCirc.getOutput(index);
 
     string exp = lib.getOperation(gateType);
     int inputSize = lib.getInputSize(gateType);
-
     bool result = lib.operStack(exp, inputSize, inputs);
+    int delay = lib.getDelay(gateType);
+    currCirc.setDelay(index, delay);
 
     Signal changedOut;
     changedOut.name = "C_O";

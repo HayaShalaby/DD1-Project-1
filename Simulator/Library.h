@@ -1,12 +1,13 @@
-
-#ifndef SIMULATOR_LIBRARY_H
-#define SIMULATOR_LIBRARY_H
+#pragma once
 #include "Circuit.h"
-#include "Circuit.cpp"
+//#include "Circuit.cpp"
 #include <stack>
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
+
+class Circuit;
 
 struct Gate{
     string name;
@@ -37,5 +38,5 @@ public:
 };
 
 
-#endif //SIMULATOR_LIBRARY_H
+
 
