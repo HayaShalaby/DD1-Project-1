@@ -17,8 +17,8 @@ void Library::readLib(string libFile){
 //    vector<Gate> libComps;
     ifstream inFile(libFile);
 
-    while(!inFile.eof()){
-        getline(inFile, line);
+    while(getline(inFile, line)){
+//        getline(inFile, line);
         stringstream ss(line);
         getline(ss, name, ',');
         getline(ss, IS, ',');
@@ -243,7 +243,7 @@ bool logicChange(int index){
     Library lib(libFile);
 
     string circFile;
-    Circuit currCirc(circFile);
+    Circuit currCirc(circFile, libFile);
     string gateType = currCirc.getType(index);
     vector<Signal> inputs= currCirc.getInputs(index);
     Signal output = currCirc.getOutput(index);
