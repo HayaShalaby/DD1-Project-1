@@ -1,4 +1,5 @@
-#include "Component.h"
+#include "Library.h"
+#include "Library.cpp"
 
 // ## HAYA BEGIN
 // Input Library Path
@@ -80,5 +81,16 @@
 
 int main()
 {
+    string oper = "~(i0 & i1)" ;
+    vector<Signal> inputs;
+    string in1, in2;
+    inputs.push_back({in1, 1});
+    inputs.push_back({in2, 0});
+    string libFile = "C:\\Users\\Haya\\Desktop\\Uni\\sophomore year\\Spring 2024\\Digital\\Project 1\\DD1-Project-1\\Test Circuits\\Library.lib\"";
+    Library lib(libFile);
+    int result = lib.operStack(oper, 2, inputs);
+
+    cout << result <<endl;
+
 
 }

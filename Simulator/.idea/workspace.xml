@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated />
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
@@ -7,26 +19,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0af8fb19-e155-4fbb-bf83-c83f7c61b7b8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Circuit 1.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 1.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 10.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 2.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 2.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 3.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 3.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 4.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 4.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 5.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 5.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 6.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 6.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 7.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 7.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 8.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 8.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 9.circ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Circuit 9.stim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Test Cases/null.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Simulator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 1.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 1.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 10.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 10.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 2.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 2.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 3.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 3.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 4.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 4.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 5.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 5.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 6.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 6.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 7.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 7.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 8.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 8.stim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 9.circ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Test Circuits/Circuit 9.stim" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +50,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -44,9 +59,9 @@
     <option name="majorVersion" value="2023" />
     <option name="minorVersion" value="2.1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2dNM1MN55k7hEqdpYDuKrLjBfu7" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -61,9 +76,21 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Language Defaults",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -73,10 +100,17 @@
       <option name="presentableId" value="Default" />
       <updated>1709843867618</updated>
       <workItem from="1709843869609" duration="12000" />
+      <workItem from="1710334594079" duration="24888000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
   </component>
 </project>

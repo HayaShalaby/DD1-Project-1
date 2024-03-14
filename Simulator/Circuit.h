@@ -65,3 +65,4 @@ public:
 	vector<Signal> getInputs(int);
 	
 };
+
