@@ -1,10 +1,9 @@
 #include "Circuit.h"
 
 //takes in the path for the circuit and calls readCircuit on it
-Circuit::Circuit(string fileName, string libpath)
+Circuit::Circuit(string fileName)
 {
 	readCircuit(fileName);
-	libPath = libpath;
 }
 
 //destructor
