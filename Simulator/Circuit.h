@@ -48,10 +48,10 @@ public:
 	//takes string input, parses it then populates and sends back a component
 	void populateComponent(string &);
 	//returns the log from the components
-	const vector<pair<Signal, int>>& returnLog();
-	//function that returns the index of a gate and a signal and modifies the value of this signal in the input
+	vector<pair<Signal, int>> returnLog();
+	//function that receives the index of a gate and a signal and modifies the value of this signal in the input
 	void setInput(int , const Signal& signal);
-	//function that returns the index of a gate and a signal and modifies the value of the gate Output
+	//function that receives the index of a gate and a signal and modifies the value of the gate Output
 	void setOutput(int, const Signal& signal);
 	//function that returns name of a gate based on the index
 	const string& getName(int);

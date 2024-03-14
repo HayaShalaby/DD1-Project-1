@@ -49,18 +49,21 @@ void Circuit::populateComponent(string & parseInput)
 	int pos;
 
 	//while string is not empty, get position of /,/
-	while (pos = parseInput.find(',') != string::npos)
+	while (pos = parseInput.find(','))
 	{
+		if (pos == string::npos) break;
 		//push onto the values vector the substring
 		values.push_back(parseInput.substr(0, pos));
 		//delete the substring
 		parseInput.erase(0, pos + 2);
 	}
 
+	values.push_back(parseInput);
+
 	//store the inputs (4th value and onwards) in a vector to be sent to the component
 	for (auto it = values.begin() + 3; it != values.end(); it++)
 	{
-		compInputs.push_back(Signal{ *it, 0 });
+		compInputs.push_back(Signal{ *it });
 	}
 
 	//get delay from library and put it in int delay
@@ -69,12 +72,12 @@ void Circuit::populateComponent(string & parseInput)
 	//= Library::getDelay(type)
 
 	//create component using the name, type, delay, output and vector of inputs
-	Gates.push_back({ values[0], values[1], delay, { values[2] }, compInputs });
+	Gates.push_back({ values[0], values[1], delay, { values[2]}, compInputs });
 
 }
 
 //returns the log from the components
-const vector<pair<Signal, int>>& Circuit::returnLog()
+vector<pair<Signal, int>> Circuit::returnLog()
 {
 	//vector that stores log of signals and the index of the gates that it changes
 	vector<pair<Signal, int>> Log;
@@ -89,7 +92,7 @@ const vector<pair<Signal, int>>& Circuit::returnLog()
 	return Log;
 }
 
-//function that returns the index of a gate and a signal and modifies the value of this signal in the input
+//function that receives the index of a gate and a signal and modifies the value of this signal in the input
 void Circuit::setInput(int index, const Signal& signal)
 {
 	//go to the component at the index and loop over all of its inputs
@@ -104,7 +107,7 @@ void Circuit::setInput(int index, const Signal& signal)
 	}
 }
 
-//function that returns the index of a gate and a signal and modifies the value of the gate Output
+//function that receives the index of a gate and a signal and modifies the value of the gate Output
 void Circuit::setOutput(int index, const Signal& signal)
 {
 	//go to the component at the set its value to that of the signal
