@@ -63,7 +63,7 @@ void Circuit::populateComponent(string & parseInput)
 	//store the inputs (4th value and onwards) in a vector to be sent to the component
 	for (auto it = values.begin() + 3; it != values.end(); it++)
 	{
-		compInputs.push_back(Signal{ *it });
+		compInputs.push_back(Signal{ *it, 0 });
 	}
 
 	//dummy value for delay

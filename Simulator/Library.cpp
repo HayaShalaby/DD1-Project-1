@@ -5,20 +5,20 @@
 
 //static vector<Gate> libComps;
 
-Library::Library(string libFile){
+Library::Library(string libFile) {
     readLib(libFile);
 }
 
 Library::~Library() {};
 
-void Library::readLib(string libFile){
+void Library::readLib(string libFile) {
     string line, name, opr, IS, D;
     int inputSize, delay;
-//    vector<Gate> libComps;
+    //    vector<Gate> libComps;
     ifstream inFile(libFile);
 
-    while(getline(inFile, line)){
-//        getline(inFile, line);
+    while (getline(inFile, line)) {
+        //        getline(inFile, line);
         stringstream ss(line);
         getline(ss, name, ',');
         getline(ss, IS, ',');
@@ -34,49 +34,49 @@ void Library::readLib(string libFile){
     inFile.close();
 }
 
-int Library::getDelay(string gateType){
-    for(int i = 0; i<libComps.size(); i++){
-        if(libComps[i].name == gateType)
+int Library::getDelay(string gateType) {
+    for (int i = 0; i < libComps.size(); i++) {
+        if (libComps[i].name == gateType)
             return libComps[i].delay;
     }
     return -1;
 }
 
-int Library::getInputSize(string gateType){
-    for(int i = 0; i<libComps.size(); i++){
-        if(libComps[i].name == gateType)
+int Library::getInputSize(string gateType) {
+    for (int i = 0; i < libComps.size(); i++) {
+        if (libComps[i].name == gateType)
             return libComps[i].inputSize;
     }
     return -1;
 }
 
-string Library::getOperation(string gateType){
-    for(int i = 0; i<libComps.size(); i++){
-        if(libComps[i].name == gateType)
+string Library::getOperation(string gateType) {
+    for (int i = 0; i < libComps.size(); i++) {
+        if (libComps[i].name == gateType)
             return libComps[i].operation;
     }
     return "";
 }
 
-int Library::precedence(char op){
-    if(op == '~')
+int Library::precedence(char op) {
+    if (op == '~')
         return 1;
-    if(op == '&'||op == '|')
+    if (op == '&' || op == '|')
         return 2;
     //might need to add a third return
     return 0;
 }
 
-int Library::applyOp(bool in1, bool in2, char op){
-    switch(op){
-        case '&': return in1 * in2;
-        case '|': return in1 + in2;
+int Library::applyOp(bool in1, bool in2, char op) {
+    switch (op) {
+    case '&': return in1 * in2;
+    case '|': return in1 + in2;
     }
     return -1;
 }
 
 //should return value be bool or would it not matter??
-int Library::operStack(string operation, int inputSize, vector<Signal> inputs){
+int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
     int i;
     //not sure if should subtract 1 or not
     int in = inputSize - 1;
@@ -87,22 +87,22 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs){
     // stack to store operators.
     stack <char> ops;
 
-    for(i = 0; i < operation.length(); i++){
+    for (i = 0; i < operation.length(); i++) {
 
         // Current token is a whitespace,
         // skip it.
-        if(operation[i] == ' ')
+        if (operation[i] == ' ')
             continue;
 
-            // Current token is an opening
-            // brace, push it to 'ops'
-        else if(operation[i] == '('){
+        // Current token is an opening
+        // brace, push it to 'ops'
+        else if (operation[i] == '(') {
             ops.push(operation[i]);
         }
 
-            // Current token is a number, push
-            // it to stack for numbers.
-        else if(operation[i] == 'i'){
+        // Current token is a number, push
+        // it to stack for numbers.
+        else if (operation[i] == 'i') {
             bool val = inputs[in].value; //sub in input
             values.push(val);
             in--;
@@ -118,21 +118,22 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs){
             i--;
         }
 
-            // Closing brace encountered, solve
-            // entire brace.
-        else if(operation[i] == ')')
+        // Closing brace encountered, solve
+        // entire brace.
+        else if (operation[i] == ')')
         {
-            while(!ops.empty() && ops.top() != '(')
-            {   char op = ops.top();
+            while (!ops.empty() && ops.top() != '(')
+            {
+                char op = ops.top();
                 ops.pop();
 
-                if(op == '~'){
+                if (op == '~') {
                     bool val = values.top();
                     values.pop();
 
                     values.push(!val);
                 }
-                else{
+                else {
                     bool val2 = values.top();
                     values.pop();
 
@@ -145,19 +146,19 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs){
             }
 
             // pop opening brace.
-            if(!ops.empty())
+            if (!ops.empty())
                 ops.pop();
         }
 
-            // Current token is an operator.
+        // Current token is an operator.
         else
         {
             // While top of 'ops' has same or greater
             // precedence to current token, which
             // is an operator. Apply operator on top
             // of 'ops' to top two elements in values stack.
-            while(!ops.empty() && precedence(ops.top())
-                                  >= precedence(operation[i])){
+            while (!ops.empty() && precedence(ops.top())
+                >= precedence(operation[i])) {
                 int val2 = values.top();
                 values.pop();
 
@@ -178,26 +179,26 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs){
     // Entire expression has been parsed at this
     // point, apply remaining ops to remaining
     // values.
-        while(!ops.empty()){
-            char op = ops.top();
-            ops.pop();
+    while (!ops.empty()) {
+        char op = ops.top();
+        ops.pop();
 
-            if(op == '~'){
-                bool val = values.top();
-                values.pop();
+        if (op == '~') {
+            bool val = values.top();
+            values.pop();
 
-                values.push(!val);
-            }
-            else{
-                bool val2 = values.top();
-                values.pop();
-
-                bool val1 = values.top();
-                values.pop();
-
-                values.push(applyOp(val1, val2, op));
-            }
+            values.push(!val);
         }
+        else {
+            bool val2 = values.top();
+            values.pop();
+
+            bool val1 = values.top();
+            values.pop();
+
+            values.push(applyOp(val1, val2, op));
+        }
+    }
 
     // Top of 'values' contains result, return it.
     return values.top();
@@ -238,14 +239,14 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs){
 //    }
 //}
 
-bool logicChange(int index){
+bool Library::logicChange(int index) {
     string libFile;
     Library lib(libFile);
 
     string circFile;
     Circuit currCirc(circFile);
     string gateType = currCirc.getType(index);
-    vector<Signal> inputs= currCirc.getInputs(index);
+    vector<Signal> inputs = currCirc.getInputs(index);
     Signal output = currCirc.getOutput(index);
 
     string exp = lib.getOperation(gateType);
@@ -257,7 +258,7 @@ bool logicChange(int index){
     Signal changedOut;
     changedOut.name = "C_O";
     changedOut.value = result;
-    if(output.value == result)
+    if (output.value == result)
         return false;
     else
     {
@@ -265,4 +266,3 @@ bool logicChange(int index){
         return true;
     }
 }
-

@@ -7,13 +7,13 @@
 #include <string>
 using namespace std;
 
-struct Gate{
+struct Gate {
     string name;
     int inputSize;
     string operation;
     int delay;
 
-    Gate(string gateName = "", int inSize = 0, string opr = "", int gateDelay = 0) : name(gateName), inputSize(inSize), operation(opr), delay(gateDelay){}
+    Gate(string gateName = "", int inSize = 0, string opr = "", int gateDelay = 0) : name(gateName), inputSize(inSize), operation(opr), delay(gateDelay) {}
 };
 
 class Library {
@@ -31,10 +31,6 @@ public:
     int precedence(char op);
     int applyOp(bool in1, bool in2, char op);
     int operStack(string operation, int inputSize, vector<Signal> inputs);
-//    bool operStack(string operation, int inputSize, vector<Signal> inputs);
+    //    bool operStack(string operation, int inputSize, vector<Signal> inputs);
     bool logicChange(int index);
 };
-
-
-
-
