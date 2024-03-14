@@ -46,9 +46,9 @@ public:
 	//note that when you read you need to store value in signal as bool
 	void readCircuit(string);
 	//takes string input, parses it then populates and sends back a component
-	Component populateComponent(string &);
+	void populateComponent(string &);
 	//returns the log from the components
-	vector<pair<Signal, int>> returnLog();
+	const vector<pair<Signal, int>>& returnLog();
 	//function that returns the index of a gate and a signal and modifies the value of this signal in the input
 	void setInput(int , const Signal& signal);
 	//function that returns the index of a gate and a signal and modifies the value of the gate Output

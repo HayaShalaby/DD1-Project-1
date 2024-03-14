@@ -19,7 +19,7 @@ void Circuit::readCircuit(string fileName)
 	//ignore the "INPUTS" at the beginning of the file
 	getline(read, temp);
 
-	//test that this works
+	//note, cannot compare getline to string
 	//loop that reads the inputs
 	while (getline(read, temp))
 	{
@@ -49,7 +49,7 @@ void Circuit::populateComponent(string & parseInput)
 	int pos;
 
 	//while string is not empty, get position of /,/
-	while (pos = temp.find(',') != string::npos)
+	while (pos = parseInput.find(',') != string::npos)
 	{
 		//push onto the values vector the substring
 		values.push_back(parseInput.substr(0, pos));
@@ -59,7 +59,7 @@ void Circuit::populateComponent(string & parseInput)
 
 	//store the inputs (4th value and onwards) in a vector to be sent to the component
 	for(auto it = values.begin()+3; it= values.end(); it++)
-		compInputs.push_back(Signal{ it* });
+		compInputs.push_back(Signal{ it*, 0 });
 
 	//get delay from library and put it in int delay
 	//maybe static function for that?
