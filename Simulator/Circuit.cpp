@@ -58,16 +58,19 @@ void Circuit::populateComponent(string & parseInput)
 	}
 
 	//store the inputs (4th value and onwards) in a vector to be sent to the component
-	for(auto it = values.begin()+3; it= values.end(); it++)
-		compInputs.push_back(Signal{ it*, 0 });
+	for (auto it = values.begin() + 3; it != values.end(); it++)
+	{
+		compInputs.push_back(Signal{ *it, 0 });
+	}
 
 	//get delay from library and put it in int delay
 	//maybe static function for that?
-	int delay;
+	int delay=0;
 	//= Library::getDelay(type)
 
 	//create component using the name, type, delay, output and vector of inputs
 	Gates.push_back({ values[0], values[1], delay, { values[2] }, compInputs });
+
 }
 
 //returns the log from the components
@@ -82,6 +85,8 @@ const vector<pair<Signal, int>>& Circuit::returnLog()
 		for (int j = 0; j < Gates[i].inputs.size(); j++)
 			//store a pair that has this input and the index of the gate that it affects
 			Log.push_back({ Gates[i].inputs.at(j), i });
+
+	return Log;
 }
 
 //function that returns the index of a gate and a signal and modifies the value of this signal in the input

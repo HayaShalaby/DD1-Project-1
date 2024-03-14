@@ -16,7 +16,7 @@ struct Signal {
 	{
 		if (x.name == name && x.value == value)
 			return true;
-		return false;
+		return false;
 	}
 };
 
