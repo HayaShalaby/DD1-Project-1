@@ -7,7 +7,7 @@ Circuit::Circuit(string fileName)
 }
 
 //destructor
-Circuit::~Circuit();
+Circuit::~Circuit() {};
 
 //reads file and populates inputs: uses populateComponent and create Log
 //note that when you read you need to store value in signal as bool
@@ -21,8 +21,9 @@ void Circuit::readCircuit(string fileName)
 
 	//test that this works
 	//loop that reads the inputs
-	while (getline(read, temp) != "COMPONENTS:")
+	while (getline(read, temp))
 	{
+		if (temp == "COMPONENTS:") break;
 		//pushes signals into inputs
 		//or curly brackets instead?
 		Inputs.push_back({ temp, 0 });
