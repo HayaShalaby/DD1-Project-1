@@ -36,10 +36,12 @@ class Circuit {
 	vector<Signal> Inputs;
 	//vector of all the components in the circuit
 	vector<Component> Gates;
+	//temporarily store library path till receive it as an object
+	string libPath;
 
 public:
 	//takes in the path for the circuit and calls readCircuit on it
-	Circuit(string fileName);
+	Circuit(string, string);
 	//destructor
 	~Circuit();
 	//reads file and populates inputs: uses populateComponent

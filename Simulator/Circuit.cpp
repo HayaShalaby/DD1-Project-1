@@ -1,9 +1,10 @@
 #include "Circuit.h"
 
 //takes in the path for the circuit and calls readCircuit on it
-Circuit::Circuit(string fileName)
+Circuit::Circuit(string fileName, string libpath)
 {
 	readCircuit(fileName);
+	libPath = libpath;
 }
 
 //destructor
@@ -68,8 +69,10 @@ void Circuit::populateComponent(string & parseInput)
 
 	//get delay from library and put it in int delay
 	//maybe static function for that?
-	int delay=0;
-	//= Library::getDelay(type)
+	//for now declare 
+	//2 issues: 1 not static, 2 don't receive it as an object and have to declare here
+	Library myLib(libPath);
+	int delay = myLib.getDelay(values[1]);
 
 	//create component using the name, type, delay, output and vector of inputs
 	Gates.push_back({ values[0], values[1], delay, { values[2]}, compInputs });
