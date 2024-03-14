@@ -27,7 +27,7 @@ int main()
     read.open(stimulifile); // this opens the stimulifile
     write.open(simfile); // this opens the simulation file
     priority_queue<pair<int,Signal>,vector<pair<int,Signal>>,decltype(cmp)> simOrder(cmp); // this is a minheap that will store all the signals with their timelapse in the ascending order of timelapse
-    Circuit mycircuit("Circuit 3.txt"); // creates the circuit using the circuit file
+    Circuit mycircuit("/Users/ranataher/Desktop/Circuits/Circuit 3.txt"); // creates the circuit using the circuit file
     vector<pair<Signal,int>> log; // log that will be used in the comparisions in the minheap
     Library lib("/Users/ranataher/Downloads/Library.lib");
 
@@ -66,13 +66,7 @@ int main()
 
         simOrder.push(element); // this pushes each element that will be outputted to the simulation file into the minHeap
     }
-
-//    cout<<simOrder.top().first<<endl;
-//    simOrder.pop();
-//    cout<<simOrder.top().first<<endl;
-//    simOrder.pop();
-//    cout<<simOrder.top().first<<endl;
-
+    read.close();
 
 
     log=mycircuit.returnLog(); // obtains the log for the given circuit
@@ -101,6 +95,7 @@ int main()
         }
 
     }
+    write.close();
 
     return 0;
 }
