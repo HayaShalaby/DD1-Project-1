@@ -1,11 +1,11 @@
 
-#ifndef SIMULATOR_LIBRARY_H
-#define SIMULATOR_LIBRARY_H
+#pragma once
 #include "Circuit.h"
 #include "Circuit.cpp"
 #include <stack>
 #include <iostream>
 #include <vector>
+#include <sstream>
 using namespace std;
 
 struct Gate{
@@ -35,7 +35,4 @@ public:
 //    bool operStack(string operation, int inputSize, vector<Signal> inputs);
     bool logicChange(int index);
 };
-
-
-#endif //SIMULATOR_LIBRARY_H
 

@@ -1,12 +1,12 @@
 
 #include "Library.h"
-#include <stack>
-#include <sstream>
+
 
 //static vector<Gate> libComps;
 
-Library::Library(string libFile){
-    readLib(libFile);
+Library::Library(string LibFile)
+{
+    readLib(LibFile);
 }
 
 Library::~Library() {};
@@ -238,12 +238,12 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs){
 //    }
 //}
 
-bool logicChange(int index){
+bool Library::logicChange(int index){
     string libFile;
     Library lib(libFile);
 
     string circFile;
-    Circuit currCirc(circFile, libFile);
+    Circuit currCirc(circFile);
     string gateType = currCirc.getType(index);
     vector<Signal> inputs= currCirc.getInputs(index);
     Signal output = currCirc.getOutput(index);
