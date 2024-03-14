@@ -113,6 +113,12 @@ void Circuit::setOutput(int index, const Signal& signal)
 	Gates[index].output.value = signal.value;
 }
 
+//function that receives the index of a gate and sets its delay
+void Circuit::setDelay(int index, int gDelay)
+{
+	Gates[index].delay = gDelay;
+}
+
 //function that returns name of a gate based on the index
 const string& Circuit::getName(int index)
 {

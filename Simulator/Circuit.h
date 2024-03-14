@@ -55,6 +55,8 @@ public:
 	void setInput(int , const Signal& signal);
 	//function that receives the index of a gate and a signal and modifies the value of the gate Output
 	void setOutput(int, const Signal& signal);
+	//function that receives the index of a gate and sets its delay
+	void setDelay(int, int);
 	//function that returns name of a gate based on the index
 	const string& getName(int);
 	//function that returns type of a gate based on the index
