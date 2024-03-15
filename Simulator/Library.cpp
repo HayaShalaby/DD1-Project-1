@@ -9,6 +9,7 @@ Library::Library(string libFile, string cirFile) {
 
     circFile = cirFile;
     readLib(libFile);
+    thisLibFile = libFile;
 }
 
 Library::~Library() {};
@@ -242,8 +243,8 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
 //}
 
 bool Library::logicChange(int index) {
-    string libFile;
-    Library lib(libFile, circFile);
+    //string libFile;
+    Library lib(thisLibFile, circFile);
 
     Circuit currCirc(circFile);
     string gateType = currCirc.getType(index);

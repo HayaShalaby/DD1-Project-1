@@ -19,6 +19,7 @@ struct Gate {
 class Library {
     vector<Gate> libComps;
     string circFile;
+    string thisLibFile;
 public:
     //ADD A CONSTRUCTOR WHICH CALLS READLIB AND POPULATES LIBCOMPS
     //takes file path
