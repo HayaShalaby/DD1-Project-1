@@ -5,7 +5,9 @@
 
 //static vector<Gate> libComps;
 
-Library::Library(string libFile) {
+Library::Library(string libFile, string cirFile) {
+
+    circFile = cirFile;
     readLib(libFile);
 }
 
@@ -241,9 +243,8 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
 
 bool Library::logicChange(int index) {
     string libFile;
-    Library lib(libFile);
+    Library lib(libFile, circFile);
 
-    string circFile;
     Circuit currCirc(circFile);
     string gateType = currCirc.getType(index);
     vector<Signal> inputs = currCirc.getInputs(index);

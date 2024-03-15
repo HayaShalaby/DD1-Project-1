@@ -18,11 +18,11 @@ struct Gate {
 
 class Library {
     vector<Gate> libComps;
-
+    string circFile;
 public:
     //ADD A CONSTRUCTOR WHICH CALLS READLIB AND POPULATES LIBCOMPS
     //takes file path
-    Library(string libFile);
+    Library(string libFile, string cirFile);
     ~Library();
     void readLib(string libFile);
     int getInputSize(string gateType);

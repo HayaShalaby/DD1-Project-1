@@ -6,6 +6,8 @@
 #include <sstream>
 #include "Circuit.h"
 #include "Library.h"
+#include "Library.cpp"
+
 using namespace std;
 
 
@@ -23,17 +25,20 @@ int main()
     ofstream write; // writes to the simulation file
     string timelapse,input,value;
     pair<int,Signal> element,test,output; // these are pairs of timelapse and the input with its value
-    string stimulifile="circuit 3 stim.txt",simfile="Circuit_3.sim.txt";
+    string stimulifile= "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.stim",simfile="Circuit_3.sim.txt";
     read.open(stimulifile); // this opens the stimulifile
     write.open(simfile); // this opens the simulation file
     priority_queue<pair<int,Signal>,vector<pair<int,Signal>>,decltype(cmp)> simOrder(cmp); // this is a minheap that will store all the signals with their timelapse in the ascending order of timelapse
-    Circuit mycircuit("Circuit 3.txt"); // creates the circuit using the circuit file
+    Circuit mycircuit("D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ"); // creates the circuit using the circuit file
     vector<pair<Signal,int>> log; // log that will be used in the comparisions in the minheap
-    Library lib("/Users/ranataher/Downloads/Library.lib");
+    Library lib("D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib","D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ" );
 
+    string space;
     // in the following while loop it reads the stimuli file and inputs the timelapse and the signal which contains the name of the input and its value into the minHeap simOrder
     while (getline(read, timelapse, ',')) // here it seperates the three values by commas
     {
+        getline(read, space, ' ');
+
         try {
             size_t pos;
             element.first = stoi(timelapse, &pos); // inputs the timelapse
@@ -48,9 +53,10 @@ int main()
 
         try {
             getline(read, input, ','); // inputs the name of the signal
+            getline(read, space, ' ');
             element.second.name = input;
             try {
-                getline(read, value,'\r'); // inputs the value of the given signal
+                getline(read, value,'\n'); // inputs the value of the given signal
                 element.second.value = (stoi(value) != 0) ? true : false;
             } catch (const exception& e) {
                 cout << "Error converting string to integer: " << e.what() << endl;
@@ -87,7 +93,7 @@ int main()
 
         for(int i=0; i<log.size();i++) // will iterate through the log to check which gate each input affects
         {
-            if(test.second==log[i].first) // checks if the current element in the log has the same signal as the current top in the minheap
+            if(test.second.name == log[i].first.name) // checks if the current element in the log has the same signal as the current top in the minheap
             {
                 mycircuit.setInput(log[i].second,test.second); // changes the input of the given gate
                 lib.logicChange(log[i].second); // calculates the output of the given gate with the new change in its input
