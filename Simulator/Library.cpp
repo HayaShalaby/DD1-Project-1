@@ -82,7 +82,10 @@ int Library::applyOp(bool in1, bool in2, char op) {
 int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
     int i;
     //not sure if should subtract 1 or not
-    int in = inputSize - 1;
+    //int in = inputSize - 1;
+
+    //index for inputs
+    int in = 0;
 
     // stack to store bool values.
     stack <bool> values;
@@ -90,6 +93,9 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
     // stack to store operators.
     stack <char> ops;
 
+    int s = operation.length();
+
+    bool notFlag = false;
     for (i = 0; i < operation.length(); i++) {
 
         // Current token is a whitespace,
@@ -106,11 +112,20 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
         // Current token is a number, push
         // it to stack for numbers.
         else if (operation[i] == 'i') {
-            bool val = inputs[in].value; //sub in input
-            values.push(val);
-            in--;
+            int index = int(operation.at(i + 1) - '0') - 1 ;
+            bool val = inputs[index].value; //sub in input
+            if (notFlag)
+            {
+                values.push(!val);
+                notFlag = false;
+            }
+            else
+                values.push(val);
+            
+            //in++;
+            //in--;
 
-            i += 2;
+            i++; 
             // right now the i points to
             // the character next to the digit,
             // since the for loop also increases
@@ -118,7 +133,8 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
             //  token position; we need to
             // decrease the value of i by 1 to
             // correct the offset.
-            i--;
+            // corrected by i++ instead of i+=2
+            //i--;
         }
 
         // Closing brace encountered, solve
@@ -156,12 +172,22 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
         // Current token is an operator.
         else
         {
+            if (operation[i] == '~') {
+                if (operation[i + 1] == 'i')
+                    notFlag = true;
+                else
+                    ops.push(operation[i]);
+            }
+            else
+                ops.push(operation[i]);
+            //trying: pushing operation onto ops stack
+            //ops.push(operation[i]);
             // While top of 'ops' has same or greater
             // precedence to current token, which
             // is an operator. Apply operator on top
             // of 'ops' to top two elements in values stack.
-            while (!ops.empty() && precedence(ops.top())
-                >= precedence(operation[i])) {
+           /* while (!ops.empty() && precedence(ops.top())
+                >= precedence(operation[i]) && values.size()>1) {
                 int val2 = values.top();
                 values.pop();
 
@@ -172,10 +198,9 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
                 ops.pop();
 
                 values.push(applyOp(val1, val2, op));
-            }
+            }*/
 
             // Push current token to 'ops'.
-            ops.push(operation[i]);
         }
     }
 

@@ -32,8 +32,19 @@ int main()
 
     Circuit mycircuit("D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ"); // creates the circuit using the circuit file
 
+
     vector<pair<Signal,int>> log; // log that will be used in the comparisions in the minheap
     Library lib("D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib","D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ" );
+    //
+    //
+    //
+    //
+    // RIGHT HERE
+    // CALL LOGIC CHANGE ON ALL THE OUTPUTS OF THE CIRCUIT
+    //
+    //
+    //
+    //
 
     string space;
     // in the following while loop it reads the stimuli file and inputs the timelapse and the signal which contains the name of the input and its value into the minHeap simOrder
@@ -94,7 +105,7 @@ int main()
                 mycircuit.setInput(log[i].second,test.second); // changes the input of the given gate
                 lib.logicChange(log[i].second); // calculates the output of the given gate with the new change in its input
 
-                output.first=test.first+mycircuit.getDelay(log[i].second);
+                output.first=(test.first+mycircuit.getDelay(log[i].second));
                 output.second.name="W"+to_string(log[i].second);
                 output.second.value=mycircuit.getOutput(log[i].second).value;
 
