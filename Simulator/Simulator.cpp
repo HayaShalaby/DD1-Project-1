@@ -34,7 +34,8 @@ int main()
 
 
     vector<pair<Signal,int>> log; // log that will be used in the comparisions in the minheap
-    Library lib("D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib","D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ" );
+    //passing reference/pointer to library
+    Library lib("D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib",&mycircuit );
     //
     //
     //
