@@ -42,8 +42,6 @@ class Circuit {
 public:
 	//takes in the path for the circuit and calls readCircuit on it
 	Circuit(string);
-	//default constructor
-	Circuit() {};
 	//destructor
 	~Circuit();
 	//reads file and populates inputs: uses populateComponent
