@@ -144,7 +144,8 @@ vector<Signal> Circuit::getInputs(int index)
 	return Gates.at(index).inputs;
 }
 
-int Circuit::gateNum()
+//function that returns the number of gates in the circuit
+int Circuit::getGateNum()
 {
 	return Gates.size();
 }

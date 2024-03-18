@@ -35,4 +35,6 @@ public:
     int operStack(string operation, int inputSize, vector<Signal> inputs);
     //    bool operStack(string operation, int inputSize, vector<Signal> inputs);
     bool logicChange(int index);
+    //sets the logic of gates at the beginning
+    void setLogic(int index);
 };

@@ -269,17 +269,20 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
 
 bool Library::logicChange(int index) {
     //string libFile;
-    Library lib(thisLibFile, currCirc);
+    //removed the lib object
+    //Library lib(thisLibFile, currCirc);
 
     string gateType = currCirc->getType(index);
     vector<Signal> inputs = currCirc->getInputs(index);
     Signal output = currCirc->getOutput(index);
 
-    string exp = lib.getOperation(gateType);
-    int inputSize = lib.getInputSize(gateType);
-    bool result = lib.operStack(exp, inputSize, inputs);
-    int delay = lib.getDelay(gateType);
-    currCirc->setDelay(index, delay);
+    string exp = getOperation(gateType);
+    int inputSize = getInputSize(gateType);
+    bool result = operStack(exp, inputSize, inputs);
+
+    //not needed because of setLogic (initializes them once)
+    /*int delay = getDelay(gateType);
+    currCirc->setDelay(index, delay);*/
 
     Signal changedOut;
     changedOut.name = "C_O";
@@ -291,4 +294,25 @@ bool Library::logicChange(int index) {
         currCirc->setOutput(index, changedOut);
         return true;
     }
+}
+
+void Library::setLogic(int index) {
+    
+    string gateType = currCirc->getType(index);
+    vector<Signal> inputs = currCirc->getInputs(index);
+    Signal output = currCirc->getOutput(index);
+
+    string exp = getOperation(gateType);
+    int inputSize = getInputSize(gateType);
+    bool result = operStack(exp, inputSize, inputs);
+    int delay = getDelay(gateType);
+    currCirc->setDelay(index, delay);
+
+    Signal changedOut;
+    changedOut.name = "C_O";
+    changedOut.value = result;
+    //if the value of the output is different, change it
+    if (output.value != result)
+        currCirc->setOutput(index, changedOut);
+
 }

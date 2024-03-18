@@ -68,6 +68,6 @@ public:
 	//function that returns the inputs of a gate based on the index
 	vector<Signal> getInputs(int);
 	//function that returns the number of gates in the circuit
-	int gateNum();
+	int getGateNum();
 };
 

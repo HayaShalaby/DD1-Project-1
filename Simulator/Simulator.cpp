@@ -36,16 +36,6 @@ int main()
     vector<pair<Signal,int>> log; // log that will be used in the comparisions in the minheap
     //passing reference/pointer to library
     Library lib("D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib",&mycircuit );
-    //
-    //
-    //
-    //
-    // RIGHT HERE
-    // CALL LOGIC CHANGE ON ALL THE OUTPUTS OF THE CIRCUIT
-    //
-    //
-    //
-    //
 
     string space;
     // in the following while loop it reads the stimuli file and inputs the timelapse and the signal which contains the name of the input and its value into the minHeap simOrder
@@ -90,6 +80,8 @@ int main()
 
 
     log=mycircuit.returnLog(); // obtains the log for the given circuit
+
+    //CALL lib.setLogic on all the elements in the log
 
 
     while(simOrder.size()!=0) // In this loop we will write the elements from the minheap to the simulation file
