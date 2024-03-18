@@ -36,6 +36,8 @@ class Circuit {
 	vector<Signal> Inputs;
 	//vector of all the components in the circuit
 	vector<Component> Gates;
+	//vector that stores log of signals and the index of the gates that it changes
+	vector<pair<Signal, int>>* Log;
 
 public:
 	//takes in the path for the circuit and calls readCircuit on it
@@ -50,7 +52,7 @@ public:
 	//takes string input, parses it then populates and sends back a component
 	void populateComponent(string &);
 	//returns the log from the components
-	vector<pair<Signal, int>> returnLog();
+	vector<pair<Signal, int>>* returnLog();
 	//function that receives the index of a gate and a signal and modifies the value of this signal in the input
 	void setInput(int , const Signal& signal);
 	//function that receives the index of a gate and a signal and modifies the value of the gate Output
@@ -67,6 +69,7 @@ public:
 	Signal getOutput(int);
 	//function that returns the inputs of a gate based on the index
 	vector<Signal> getInputs(int);
-	
+	//function that returns the number of gates in the circuit
+	int gateNum();
 };
 
