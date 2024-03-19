@@ -1,0 +1,3 @@
+/Users/ranataher/Desktop/DD1-Project-1/DD1-Project-1/cmake-build-debug/CMakeFiles/DD1_Project_1.dir
+/Users/ranataher/Desktop/DD1-Project-1/DD1-Project-1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/ranataher/Desktop/DD1-Project-1/DD1-Project-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
