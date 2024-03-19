@@ -37,7 +37,7 @@ class Circuit {
 	//vector of all the components in the circuit
 	vector<Component> Gates;
 	//vector that stores log of signals and the index of the gates that it changes
-	vector<pair<Signal, int>>* Log;
+	vector<pair<Signal, int>> Log;
 
 public:
 	//takes in the path for the circuit and calls readCircuit on it

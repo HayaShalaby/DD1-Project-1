@@ -42,7 +42,7 @@ void Circuit::readCircuit(string fileName)
 		//for every input in each circuit
 		for (int j = 0; j < Gates[i].inputs.size(); j++)
 			//store a pair that has this input and the index of the gate that it affects
-			Log->push_back({ Gates[i].inputs.at(j), i });
+			Log.push_back({ Gates[i].inputs.at(j), i });
 
 }
 
@@ -86,7 +86,7 @@ void Circuit::populateComponent(string & parseInput)
 //returns the log from the components
 vector<pair<Signal, int>>* Circuit::returnLog()
 {
-	return Log;
+	return &Log;
 }
 
 //function that receives the index of a gate and a signal and modifies the value of this signal in the input
