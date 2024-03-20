@@ -65,9 +65,12 @@ public:
 	int getDelay(int);
 	//function that returns the output of a gate based on the index
 	Signal getOutput(int);
-	//function that returns the inputs of a gate based on the index
+	//function that returns pointer to the inputs of a gate based on the index
 	vector<Signal> getInputs(int);
+	//function that returns pointer to the inputs of a gate based on the index
+	vector<Signal>* getInputsPtr(int);
 	//function that returns the number of gates in the circuit
 	int getGateNum();
+
 };
 

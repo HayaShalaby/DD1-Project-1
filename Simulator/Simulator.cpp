@@ -20,28 +20,31 @@ auto cmp = [](const pair<int,Signal>& num_1, const pair<int,Signal>& num_2)
 
 int main()
 {
-    int size;
-    string Libfile;
-    cout<<"Enter the number of circuits that you will use"<<endl;
-    cin>>size;
-    cout<<"Enter the path of the library file"<<endl;
-    cin>>Libfile;
+    //int size;
+    string Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
+    //cout<<"Enter the number of circuits that you will use"<<endl;
+    //cin>>size;
+    //cout<<"Enter the path of the library file"<<endl;
+    //cin>>Libfile;
 
-    for(int cir=0; cir<size; cir++)
-    {
+    //for(int cir=0; cir<size; cir++)
+    //{
         ifstream read; // used to read from stimuli file
         ofstream write; // writes to the simulation file
-        string timelapse,input,value;
+        string timelapse, input, value;
         pair<int,Signal> element,test,output; // these are pairs of timelapse and the input with its value
         string stimulifile,simfile,circfile;
 
+        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ";
+        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.stim";
+        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.sim";
 
-        cout<<"Enter the path of the first circuit file"<<endl;
-        cin>>circfile;
-        cout<<"Enter the path of the stimulifile for that circuit"<<endl;
-        cin>>stimulifile;
-        cout<<"Enter the path of the file you want to output the simulation to"<<endl;
-        cin>>simfile;
+    //    cout<<"Enter the path of the first circuit file"<<endl;
+    //    cin>>circfile;
+    //    cout<<"Enter the path of the stimulifile for that circuit"<<endl;
+    //    cin>>stimulifile;
+    //    cout<<"Enter the path of the file you want to output the simulation to"<<endl;
+    //    cin>>simfile;
 
         read.open(stimulifile); // this opens the stimulifile
         write.open(simfile); // this opens the simulation file
@@ -96,10 +99,19 @@ int main()
         read.close();
 
 
-        log=mycircuit.returnLog(); // obtains the log for the given circuit
+        
 
-        //CALL lib.setLogic on all the elements in the log
+        //Call lib.setLogic on all the gates
 
+        int gateNums = mycircuit.getGateNum();
+        for (int i = 0; i < gateNums; i++) // will iterate through the log to check which gate each input affects
+        {
+            lib.setLogic(i);
+        }
+
+        
+
+        log = mycircuit.returnLog(); // obtains the log for the given circuit
 
         while(simOrder.size()!=0) // In this loop we will write the elements from the minheap to the simulation file
         {
@@ -113,7 +125,7 @@ int main()
                 if(test.second.name == (*log)[i].first.name) // checks if the current element in the log has the same signal as the current top in the minheap
                 {
                     mycircuit.setInput((*log)[i].second,test.second); // changes the input of the given gate
-                    lib.setLogic((*log)[i].second);
+                    //lib.setLogic((*log)[i].second);
                     lib.logicChange((*log)[i].second); // calculates the output of the given gate with the new change in its input
 
                     output.first=(test.first+mycircuit.getDelay((*log)[i].second)); //the new timelapse of the changed output is calculated
@@ -127,7 +139,7 @@ int main()
         }
         write.close();
 
-    }
+    //}
 
     return 0;
 }

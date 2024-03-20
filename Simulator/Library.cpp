@@ -308,11 +308,37 @@ void Library::setLogic(int index) {
     int delay = getDelay(gateType);
     currCirc->setDelay(index, delay);
 
+    int numGates = currCirc->getGateNum();
     Signal changedOut;
     changedOut.name = "C_O";
     changedOut.value = result;
     //if the value of the output is different, change it
     if (output.value != result)
+    {
+        //set the output of the gate to the correct value
         currCirc->setOutput(index, changedOut);
+        //variable to store the inputs if each gate
+        vector<Signal>* inputsPtr;
+
+        //loop over all the gates
+        for (int i = 0; i < numGates; i++)
+        {
+            //get the inputs of each gate and the number of the inputs
+            inputsPtr = currCirc->getInputsPtr(i);
+            inputSize = inputsPtr->size();
+            //for every input, if the name is the same as that of our output, change the value
+                for (int j = 0; j < inputSize; j++)
+                {
+                    if (output.name == inputsPtr->at(j).name)
+                        inputsPtr->at(j).value = result;
+                }
+        }
+    }
+
+    //for every gate
+    // for every ouput
+    // for every gate
+    // if output name same as input name
+    // set make the vales equal
 
 }
