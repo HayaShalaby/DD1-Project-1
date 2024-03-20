@@ -20,31 +20,31 @@ auto cmp = [](const pair<int,Signal>& num_1, const pair<int,Signal>& num_2)
 
 int main()
 {
-    //int size;
-    string Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
-    //cout<<"Enter the number of circuits that you will use"<<endl;
-    //cin>>size;
-    //cout<<"Enter the path of the library file"<<endl;
-    //cin>>Libfile;
+    int size;
+    string Libfile ;//= "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
+    cout<<"Enter the number of circuits that you will use"<<endl;
+    cin>>size;
+    cout<<"Enter the path of the library file"<<endl;
+    getline(cin,Libfile);
 
-    //for(int cir=0; cir<size; cir++)
-    //{
+    for(int cir=0; cir<size; cir++)
+    {
         ifstream read; // used to read from stimuli file
         ofstream write; // writes to the simulation file
         string timelapse, input, value;
         pair<int,Signal> element,test,output; // these are pairs of timelapse and the input with its value
         string stimulifile,simfile,circfile;
 
-        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ";
-        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.stim";
-        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.sim";
+//        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ";
+//        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.stim";
+//        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.sim";
 
-    //    cout<<"Enter the path of the first circuit file"<<endl;
-    //    cin>>circfile;
-    //    cout<<"Enter the path of the stimulifile for that circuit"<<endl;
-    //    cin>>stimulifile;
-    //    cout<<"Enter the path of the file you want to output the simulation to"<<endl;
-    //    cin>>simfile;
+        cout<<"Enter the path of the first circuit file"<<endl;
+        getline(cin,circfile);
+        cout<<"Enter the path of the stimulifile for that circuit"<<endl;
+        getline(cin,stimulifile);
+        cout<<"Enter the path of the file you want to output the simulation to"<<endl;
+        getline(cin,simfile);
 
         read.open(stimulifile); // this opens the stimulifile
         write.open(simfile); // this opens the simulation file
@@ -124,22 +124,26 @@ int main()
             {
                 if(test.second.name == (*log)[i].first.name) // checks if the current element in the log has the same signal as the current top in the minheap
                 {
-                    mycircuit.setInput((*log)[i].second,test.second); // changes the input of the given gate
-                    //lib.setLogic((*log)[i].second);
-                    lib.logicChange((*log)[i].second); // calculates the output of the given gate with the new change in its input
+                    if(lib.logicChange((*log)[i].second))
+                    {
+                        mycircuit.setInput((*log)[i].second,test.second); // changes the input of the given gate
+                        //lib.setLogic((*log)[i].second);
+                        lib.logicChange((*log)[i].second); // calculates the output of the given gate with the new change in its input
 
-                    output.first=(test.first+mycircuit.getDelay((*log)[i].second)); //the new timelapse of the changed output is calculated
-                    output.second.name="W"+to_string((*log)[i].second); //the name of the wire taking the specific output is set
-                    output.second.value=mycircuit.getOutput((*log)[i].second).value; // the new value of the output signal is calculated
+                        output.first=(test.first+mycircuit.getDelay((*log)[i].second)); //the new timelapse of the changed output is calculated
+                        output.second.name="W"+to_string((*log)[i].second); //the name of the wire taking the specific output is set
+                        output.second.value=mycircuit.getOutput((*log)[i].second).value; // the new value of the output signal is calculated
 
-                    simOrder.push(output); // pushes the new element which is the output of the given gate connected to the current input that changed its output so that changed output with its timelapse which is the timelapse of its input plus the delay of the given gate plus its new value will be pushed into the minHeap (sortedOrder)
+                        simOrder.push(output); // pushes the new element which is the output of the given gate connected to the current input that changed its output so that changed output with its timelapse which is the timelapse of its input plus the delay of the given gate plus its new value will be pushed into the minHeap (sortedOrder)
+                    }
+
                 }
             }
 
         }
         write.close();
 
-    //}
+    }
 
     return 0;
 }
