@@ -135,12 +135,12 @@ int Circuit::getDelay(int index)
 }
 
 //function that returns the output of a gate based on the index
-Signal Circuit::getOutput(int index)
+const Signal & Circuit::getOutput(int index)
 {
 	return Gates.at(index).output;
 }
 //function that returns  the inputs of a gate based on the index
-vector<Signal> Circuit::getInputs(int index)
+const vector<Signal> & Circuit::getInputs(int index)
 {
 	return Gates.at(index).inputs;
 }
@@ -155,4 +155,10 @@ vector<Signal>* Circuit::getInputsPtr(int index)
 int Circuit::getGateNum()
 {
 	return Gates.size();
+}
+
+//function that returns the inputs of the circuit
+const vector<Signal> & Circuit::getCircuitInputs()
+{
+	return Inputs;
 }

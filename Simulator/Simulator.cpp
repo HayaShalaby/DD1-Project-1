@@ -7,6 +7,7 @@
 #include "Circuit.h"
 #include "Library.h"
 #include "Library.cpp"
+#include <map>
 
 using namespace std;
 
@@ -16,6 +17,94 @@ auto cmp = [](const pair<int,Signal>& num_1, const pair<int,Signal>& num_2)
 {
     return num_1.first > num_2.first;
 };
+
+struct sim {
+    string output = "";
+    int time = 0;
+};
+
+// Function to output the JSON
+void JSON(string simFileName, string JSONfile, Circuit* circuit) {
+
+    ifstream read(simFileName);
+    ofstream write(JSONfile);
+    map<string, sim> waveform;
+    string name, value, timeString, temp; int time, timeDiff, squareNum, lastTime;// , inputSize, gateSize;
+    //vector<Signal>inputs;
+    
+    ////set strings to inital values;
+    //inputs = circuit->getCircuitInputs();
+    //inputSize = inputs.size();
+    //gateSize = circuit->getGateNum();
+
+    //for (auto & input: inputs)
+    //{
+    //    waveform[input.name].output += input.value;
+    //}
+
+    //for (int i = 0; i < gateSize; i++)
+    //{
+    //    waveform["W" + to_string(i)].output = circuit->getOutput(i).value;
+    //}
+
+    // typecast to int if it doesnt 
+    while (read >> timeString)
+    {
+        read >> name >> value;
+
+        timeDiff = stoi(timeString) - waveform[name].time;
+
+        //if no value has been initialized to this map, add the opposite of the changed value in the beginning
+        if (waveform[name].output == "")
+        {
+            if (value == "0")
+                waveform[name].output += "1";
+            else waveform[name].output += "0";
+        }
+
+        //our interval is 50. We minus one to exclude the last changed value
+        squareNum = (timeDiff / 50) - 1;
+        
+        for (int i = 0; i < squareNum; i++)
+        {
+            waveform[name].output += ".";
+        }
+
+        waveform[name].output += value;
+
+        waveform[name].time = stoi(timeString);
+
+        lastTime = waveform[name].time;
+    }
+
+
+    // iterate over the map
+    for (auto it = waveform.begin(); it != waveform.end(); it++)
+    {
+        //calculate the time difference between the lastTime and the current time of the signal
+        timeDiff = lastTime - it->second.time;
+        ///calculate the number of squares
+        squareNum = (timeDiff / 50);
+        
+        if (squareNum > 0)
+        {
+            for (int i = 0; i < squareNum; i++)
+            {
+                it->second.output += ".";
+            }
+        }
+    }
+
+    //output the JSON
+    write << "{ \"signal\" : [\n";
+    for (auto it = waveform.begin(); it != waveform.end(); it++)
+    {
+        write << "{ \"name\": \"" << it->first << "\", \"wave\": \"" << it->second.output << "\" }";
+        if (next(it) != waveform.end()) write << ",\n";
+        else write << "] }";
+    }
+
+}
 
 
 int main()
@@ -33,11 +122,13 @@ int main()
         ofstream write; // writes to the simulation file
         string timelapse, input, value;
         pair<int,Signal> element,test,output; // these are pairs of timelapse and the input with its value
-        string stimulifile,simfile,circfile;
+        string stimulifile,simfile,circfile, JSONfile;
 
-       circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.circ";
-        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.stim";
-        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 1/Circuit 1.sim";
+        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.circ";
+        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.stim";
+        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.sim";
+        JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.JSON";
+
 
        /* cout<<"Enter the path of the first circuit file"<<endl;
         getline(cin,circfile);
@@ -142,6 +233,8 @@ int main()
 
         }
         write.close();
+
+        JSON(simfile, JSONfile, &mycircuit);
 
     //}
 
