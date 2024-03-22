@@ -24,28 +24,13 @@ struct sim {
 };
 
 // Function to output the JSON
-void JSON(string simFileName, string JSONfile, Circuit* circuit) {
+void JSON(string simFileName, string JSONfile) {
 
     ifstream read(simFileName);
     ofstream write(JSONfile);
     map<string, sim> waveform;
-    string name, value, timeString, temp; int time, timeDiff, squareNum, lastTime;// , inputSize, gateSize;
-    //vector<Signal>inputs;
+    string name, value, timeString, temp; int time, timeDiff, squareNum, lastTime;
     
-    ////set strings to inital values;
-    //inputs = circuit->getCircuitInputs();
-    //inputSize = inputs.size();
-    //gateSize = circuit->getGateNum();
-
-    //for (auto & input: inputs)
-    //{
-    //    waveform[input.name].output += input.value;
-    //}
-
-    //for (int i = 0; i < gateSize; i++)
-    //{
-    //    waveform["W" + to_string(i)].output = circuit->getOutput(i).value;
-    //}
 
     // typecast to int if it doesnt 
     while (read >> timeString)
@@ -62,7 +47,7 @@ void JSON(string simFileName, string JSONfile, Circuit* circuit) {
             else waveform[name].output += "0";
         }
 
-        //our interval is 50. We minus one to exclude the last changed value
+        //our interval is 50, We minus one to exclude the last changed value
         squareNum = (timeDiff / 50) - 1;
         
         for (int i = 0; i < squareNum; i++)
@@ -127,7 +112,7 @@ int main()
         circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.circ";
         stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.stim";
         simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.sim";
-        JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.JSON";
+        JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.json";
 
 
        /* cout<<"Enter the path of the first circuit file"<<endl;
@@ -234,7 +219,7 @@ int main()
         }
         write.close();
 
-        JSON(simfile, JSONfile, &mycircuit);
+        JSON(simfile, JSONfile);
 
     //}
 

@@ -79,7 +79,6 @@ vector<pair<Signal, int>>* Circuit::returnLog()
 {
 
 	//set the Log
-
 	//for every gate in the circuit
 	for (int i = 0; i < Gates.size(); i++)
 		//for every input in each circuit
