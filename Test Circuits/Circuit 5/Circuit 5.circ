@@ -7,6 +7,3 @@ COMPONENTS:
 G0, NAND2, W0, A, B
 G1, OR2, W1, C, D
 G2, NAND2, W2, W0, W1
-
-
-

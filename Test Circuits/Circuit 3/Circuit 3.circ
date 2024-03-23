@@ -2,10 +2,7 @@ INPUTS:
 A
 B
 COMPONENTS:
-G0, NOT, w0, A
-G1, NAND2, w1, w0,B
+G0, NAND2, w0, A, A
+G1, NAND2, w1, A, B
 G2, NAND2, w2, B, w0
 G3, NAND2, w3, w1, w2
-
-
-

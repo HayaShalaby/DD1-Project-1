@@ -99,20 +99,27 @@ int main()
         ofstream write; // writes to the simulation file
         string timelapse, input, value;
         pair<int,Signal> element,test,output; // these are pairs of timelapse and the input with its value
-        string stimulifile,simfile,circfile, JSONfile,Libfile;
+        string stimulifile, simfile, circfile, JSONfile, Libfile;
 
-        cout<<"Enter the name of the library file"<<endl;
+        cout<<"Enter the path of the library file"<<endl;
         getline(cin,Libfile);
-        cout<<"Enter the name of the first circuit file"<<endl;
+        cout<<"\nEnter the path of the circuit file"<<endl;
         getline(cin,circfile);
-        cout<<"Enter the name of the stimulifile for that circuit"<<endl;
+        cout<<"\nEnter the path of the stimulifile for that circuit"<<endl;
         getline(cin,stimulifile);
-        cout<<"Enter the name of the file you want to output the simulation to"<<endl;
+        cout<<"\nEnter the path of the file you want to output the simulation to"<<endl;
         getline(cin,simfile);
-        cout<<"Enter the name of the JSON file you want to output to"<<endl;
+        cout<<"\nEnter the path of the JSON file you want to output to"<<endl;
         getline(cin,JSONfile);
-    
-    
+
+        // for testing purposes 
+        /*Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
+        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.circ";
+        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.stim";
+        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.sim";
+        JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.json";
+    */
+
         read.open(stimulifile); // this opens the stimulifile
         write.open(simfile); // this opens the simulation file
         priority_queue<pair<int,Signal>,vector<pair<int,Signal> >,decltype(cmp)> simOrder(cmp); // this is a minheap that will store all the signals with their timelapse in the ascending order of timelapse

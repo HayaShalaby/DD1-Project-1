@@ -4,10 +4,7 @@ B
 C
 D
 COMPONENTS:
-G0, NAND2, W0, A
+G0, NAND2, W0, A, A
 G1, NAND3, W1, A, B, C
 G2, NOR2, W2, C, D
 G3, NAND4, W3, W0, W1, W2, D
-
-
-
