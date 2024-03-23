@@ -94,33 +94,28 @@ void JSON(string simFileName, string JSONfile) {
 
 int main()
 {
-    int size;
-    string Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
-    /*cout<<"Enter the number of circuits that you will use"<<endl;
-    cin>>size;
-    cout<<"Enter the path of the library file"<<endl;
-    getline(cin,Libfile);*/
 
-    /*for(int cir=0; cir<size; cir++)
-    {*/
+
+
         ifstream read; // used to read from stimuli file
         ofstream write; // writes to the simulation file
         string timelapse, input, value;
         pair<int,Signal> element,test,output; // these are pairs of timelapse and the input with its value
-        string stimulifile,simfile,circfile, JSONfile;
+        string stimulifile,simfile,circfile, JSONfile,Libfile;
 
         circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.circ";
         stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.stim";
         simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.sim";
         JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 2/Circuit 2.json";
 
-
-       /* cout<<"Enter the path of the first circuit file"<<endl;
+        cout<<"Enter the name of the library file"<<endl;
+        getline(cin,Libfile);
+        cout<<"Enter the name of the first circuit file"<<endl;
         getline(cin,circfile);
-        cout<<"Enter the path of the stimulifile for that circuit"<<endl;
+        cout<<"Enter the name of the stimulifile for that circuit"<<endl;
         getline(cin,stimulifile);
-        cout<<"Enter the path of the file you want to output the simulation to"<<endl;
-        getline(cin,simfile);*/
+        cout<<"Enter the name of the file you want to output the simulation to"<<endl;
+        getline(cin,simfile);
 
         read.open(stimulifile); // this opens the stimulifile
         write.open(simfile); // this opens the simulation file
@@ -168,7 +163,6 @@ int main()
                 return 1;
             }
 
-            //cout<<element.first<<endl;
 
             simOrder.push(element); // this pushes each element that will be outputted to the simulation file into the minHeap
         }
@@ -203,7 +197,6 @@ int main()
                     
                     bool change;
                         mycircuit.setInput((*log)[i].second,test.second); // changes the input of the given gate
-                        //lib.setLogic((*log)[i].second);
                         change=lib.logicChange((*log)[i].second); // calculates the output of the given gate with the new change in its input
 
                         output.first=(test.first+mycircuit.getDelay((*log)[i].second)); //the new timelapse of the changed output is calculated
@@ -221,7 +214,7 @@ int main()
 
         JSON(simfile, JSONfile);
 
-    //}
+
 
     return 0;
 }
