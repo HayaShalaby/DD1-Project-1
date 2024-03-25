@@ -111,6 +111,7 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
         else if (operation[i] == 'i') {
             int index = int(operation.at(i + 1) - '0') - 1 ;
             bool val = inputs[index].value;
+            //If a NOT was applied to this input
             if (notFlag)
             {
                 values.push(!val);
@@ -197,18 +198,22 @@ int Library::operStack(string operation, int inputSize, vector<Signal> inputs) {
 
 
 bool Library::logicChange(int index) {
+    //Getting all needed info using Circuit and Library member functions
     string gateType = currCirc->getType(index);
     vector<Signal> inputs = currCirc->getInputs(index);
     Signal output = currCirc->getOutput(index);
 
     string exp = getOperation(gateType);
     int inputSize = getInputSize(gateType);
+    //Calling operStack to get result of logic operation
     bool result = operStack(exp, inputSize, inputs);
 
 
+    //Creating an instance of Signal to store result
     Signal changedOut;
     changedOut.name = "C_O";
     changedOut.value = result;
+    //Checking if a logic change occurred and setting the new output value if yes
     if (output.value == result)
         return false;
     else
@@ -255,9 +260,4 @@ void Library::setLogic(int index) {
                 }
         }
     }
-    //for every gate
-    // for every ouput
-    // for every gate
-    // if output name same as input name
-    // set make the vales equal
 }
