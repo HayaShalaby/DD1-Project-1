@@ -40,7 +40,7 @@ void JSON(string simFileName, string JSONfile) {
         timeDiff = stoi(timeString) - waveform[name].time;
 
         //if no value has been initialized to this map, add the opposite of the changed value in the beginning
-        if (waveform[name].output == "")
+        if (waveform[name].output == "" && timeString != "0")
         {
             if (value == "0")
                 waveform[name].output += "1";
@@ -113,18 +113,25 @@ int main()
         getline(cin,JSONfile);
 
         // for testing purposes 
-        /*Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
-        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.circ";
-        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.stim";
-        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.sim";
-        JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Circuit 8/Circuit 8.json";
-    */
+
+
+       /* Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/cells.lib";
+        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.cir";
+        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.stim";
+        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.sim";
+        JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.json";*/
+        
+        //"D:\University\5.Spring 2024\Digital Design\Digital Project\DD1-Project-1\Test\1.cir"
+        //Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
 
         read.open(stimulifile); // this opens the stimulifile
         write.open(simfile); // this opens the simulation file
         priority_queue<pair<int,Signal>,vector<pair<int,Signal> >,decltype(cmp)> simOrder(cmp); // this is a minheap that will store all the signals with their timelapse in the ascending order of timelapse
 
         Circuit mycircuit(circfile); // creates the circuit using the circuit file
+
+        //tests if an error was returned from the circuit
+        if (circfile == "") return -1;
 
 
         vector<pair<Signal,int> >* log; // log that will be used in the comparisions in the minheap
@@ -180,6 +187,7 @@ int main()
         for (int i = 0; i < gateNums; i++) // will iterate through the log to check which gate each input affects
         {
             lib.setLogic(i);
+            //if it returns -1, cout and return -1 to exit the main
         }
 
         
@@ -203,7 +211,7 @@ int main()
                         change=lib.logicChange((*log)[i].second); // calculates the output of the given gate with the new change in its input
 
                         output.first=(test.first+mycircuit.getDelay((*log)[i].second)); //the new timelapse of the changed output is calculated
-                        output.second.name="W"+to_string((*log)[i].second); //the name of the wire taking the specific output is set
+                        output.second.name="w"+to_string((*log)[i].second + 1); //the name of the wire taking the specific output is set
                         output.second.value=mycircuit.getOutput((*log)[i].second).value; // the new value of the output signal is calculated
 
                        if(change) simOrder.push(output); // pushes the new element which is the output of the given gate connected to the current input that changed its output so that changed output with its timelapse which is the timelapse of its input plus the delay of the given gate plus its new value will be pushed into the minHeap (sortedOrder)
@@ -216,7 +224,6 @@ int main()
         write.close();
 
         JSON(simfile, JSONfile);
-
 
 
     return 0;

@@ -1,9 +1,10 @@
 #include "Circuit.h"
 
 //takes in the path for the circuit and calls readCircuit on it
-Circuit::Circuit(string fileName)
+Circuit::Circuit(string & fileName)
 {
-	readCircuit(fileName);
+	if (readCircuit(fileName) == -1);
+	fileName = "";
 }
 
 //destructor
@@ -11,7 +12,7 @@ Circuit::~Circuit() {};
 
 //reads file and populates inputs: uses populateComponent and create Log
 //note that when you read you need to store value in signal as bool
-void Circuit::readCircuit(string fileName)
+int Circuit::readCircuit(string fileName)
 {
 	ifstream read(fileName);
 	//temp string to store input
@@ -27,18 +28,22 @@ void Circuit::readCircuit(string fileName)
 		//pushes signals into inputs
 		//or curly brackets instead?
 		Inputs.push_back({ temp, 0 });
+		signals.insert(temp);
 	}
 
 	//while there are still gates, populate a new component
 	while (getline(read, temp))
 	{
-		populateComponent(temp);
+		if (populateComponent(temp) == -1)
+			return -1;
+
 	}
 
+	return 0;
 }
 
 //takes string input, parses it then populates a gate and adds it to the circuit
-void Circuit::populateComponent(string & parseInput)
+int Circuit::populateComponent(string & parseInput)
 {
 	//vector to store parsed substrings
 	vector<string> values;
@@ -58,11 +63,21 @@ void Circuit::populateComponent(string & parseInput)
 		parseInput.erase(0, pos + 2);
 	}
 
+	//insert the input into the signals set
+	signals.insert(values[2]);
+
+	//to push the last substring
 	values.push_back(parseInput);
 
 	//store the inputs (4th value and onwards) in a vector to be sent to the component
 	for (auto it = values.begin() + 3; it != values.end(); it++)
 	{
+		//if an input is not an existing signal, exit the program 
+		if (signals.find(*it) == signals.end())
+		{
+			cout << "Input signal to gate " << values[0] << " does not exist.\n\nExiting program...\n\n";
+			return -1;
+		}
 		compInputs.push_back(Signal{ *it, 0 });
 	}
 
@@ -72,6 +87,7 @@ void Circuit::populateComponent(string & parseInput)
 	//create component using the name, type, delay, output and vector of inputs
 	Gates.push_back({ values[0], values[1], delay, { values[2]}, compInputs });
 
+	return 0;
 }
 
 //returns the log from the components

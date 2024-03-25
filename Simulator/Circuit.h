@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -38,17 +39,20 @@ class Circuit {
 	vector<Component> Gates;
 	//vector that stores log of signals and the index of the gates that it changes
 	vector<pair<Signal, int>> Log;
+	//keeps track of what signals we have in the circuit
+	set <string> signals;
 
 public:
 	//takes in the path for the circuit and calls readCircuit on it
-	Circuit(string);
+	Circuit(string&);
 	//destructor
 	~Circuit();
 	//reads file and populates inputs: uses populateComponent
-	//note that when you read you need to store value in signal as bool
-	void readCircuit(string);
-	//takes string input, parses it then populates and sends back a component
-	void populateComponent(string &);
+	//returns -1 if an input to a gate does not exist as a signal in the circuit
+	int readCircuit(string);
+	//takes string input, parses it then populates and sends back a component, 
+	//returns -1 if an input to a gate does not exist as a signal in the circuit
+	int populateComponent(string &);
 	//returns the log from the components
 	vector<pair<Signal, int>>* returnLog();
 	//function that receives the index of a gate and a signal and modifies the value of this signal in the input
