@@ -227,7 +227,7 @@ int main()
                         change=lib.logicChange((*log)[i].second); // calculates the output of the given gate with the new change in its input
 
                         output.first=(test.first+mycircuit.getDelay((*log)[i].second)); //the new timelapse of the changed output is calculated
-                        output.second.name="w"+to_string((*log)[i].second + 1); //the name of the wire taking the specific output is set
+                        output.second.name=mycircuit.getOutputName((*log)[i].second)); //the name of the wire taking the specific output is set
                         output.second.value=mycircuit.getOutput((*log)[i].second).value; // the new value of the output signal is calculated
 
                        if(change) simOrder.push(output); // pushes the new element which is the output of the given gate connected to the current input that changed its output so that changed output with its timelapse which is the timelapse of its input plus the delay of the given gate plus its new value will be pushed into the minHeap (sortedOrder)
