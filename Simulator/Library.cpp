@@ -57,6 +57,7 @@ string Library::getOperation(string gateType) {
         if (libComps[i].name == gateType)
             return libComps[i].operation;
     }
+
     return "";
 }
 
@@ -223,12 +224,17 @@ bool Library::logicChange(int index) {
     }
 }
 
-void Library::setLogic(int index) {
+int Library::setLogic(int index) {
     string gateType = currCirc->getType(index);
     vector<Signal> inputs = currCirc->getInputs(index);
     Signal output = currCirc->getOutput(index);
 
     string exp = getOperation(gateType);
+    //Gate not found error
+    if(exp == "") {
+        cout << gateType << " could not be found in the Library." <<endl;
+        return -1;
+    }    
     int inputSize = getInputSize(gateType);
     bool result = operStack(exp, inputSize, inputs);
     int delay = getDelay(gateType);
@@ -260,4 +266,6 @@ void Library::setLogic(int index) {
                 }
         }
     }
+
+    return 1;
 }

@@ -184,10 +184,13 @@ int main()
         //Call lib.setLogic on all the gates
 
         int gateNums = mycircuit.getGateNum();
+        int error;
         for (int i = 0; i < gateNums; i++) // will iterate through the log to check which gate each input affects
         {
-            lib.setLogic(i);
-            //if it returns -1, cout and return -1 to exit the main
+            error = lib.setLogic(i);
+            //Checking for a library error
+            if(error == -1)
+                return -1;
         }
 
         

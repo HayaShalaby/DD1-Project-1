@@ -51,5 +51,5 @@ public:
     //Uses operStack to update a circuit's logic values and checks if a logic change occured
     bool logicChange(int index);
     //Sets the logic of gates at the beginning
-    void setLogic(int index);
+    int setLogic(int index);
 };
