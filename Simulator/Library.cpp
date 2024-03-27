@@ -234,7 +234,7 @@ int Library::setLogic(int index) {
     if(exp == "") {
         cout << gateType << " could not be found in the Library." <<endl;
         return -1;
-    }    
+    }
     int inputSize = getInputSize(gateType);
     bool result = operStack(exp, inputSize, inputs);
     int delay = getDelay(gateType);
