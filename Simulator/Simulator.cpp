@@ -100,7 +100,8 @@ int main()
         string timelapse, input, value;
         pair<int,Signal> element,test,output; // these are pairs of timelapse and the input with its value
         string stimulifile, simfile, circfile, JSONfile, Libfile;
-
+        bool flag=false;
+    
         cout<<"Enter the path of the library file"<<endl;
         getline(cin,Libfile);
         cout<<"\nEnter the path of the circuit file"<<endl;
@@ -129,7 +130,7 @@ int main()
         priority_queue<pair<int,Signal>,vector<pair<int,Signal> >,decltype(cmp)> simOrder(cmp); // this is a minheap that will store all the signals with their timelapse in the ascending order of timelapse
 
         Circuit mycircuit(circfile); // creates the circuit using the circuit file
-
+        inputs=mycircuit.getCircuitInputs();
         //tests if an error was returned from the circuit
         if (circfile == "") return -1;
 
@@ -158,6 +159,18 @@ int main()
 
             try {
                 getline(read, input, ','); // inputs the name of the signal
+                for(int i=0; i<inputs.size(); i++)
+                {
+                   if(inputs[i].name==input)
+                       flag=true;
+                }
+                if(!flag)
+                {
+                    cout<<"This input does not exist in the given circuit"<<endl;
+                    cout<<"Existing Program....."<<endl;
+                    return 0;
+                }
+                
                 getline(read, space, ' ');
                 element.second.name = input;
                 try {
