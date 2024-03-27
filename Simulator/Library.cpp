@@ -233,7 +233,7 @@ int Library::setLogic(int index) {
     //Gate not found error
     if(exp == "") {
         cout << gateType << " could not be found in the Library." <<endl;
-        return -1;
+        return -2;
     }
     int inputSize = getInputSize(gateType);
     bool result = operStack(exp, inputSize, inputs);

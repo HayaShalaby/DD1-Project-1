@@ -3,8 +3,8 @@
 //takes in the path for the circuit and calls readCircuit on it
 Circuit::Circuit(string & fileName)
 {
-	if (readCircuit(fileName) == -1);
-	fileName = "";
+	if (readCircuit(fileName) == -1)
+		fileName = "x";
 }
 
 //destructor
