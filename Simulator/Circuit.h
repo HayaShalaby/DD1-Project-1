@@ -77,8 +77,5 @@ public:
 	int getGateNum();
 	//returns circuit inputs
 	const vector<Signal>& getCircuitInputs();
-
-	//function that returns name of output based on the index
-	const string& getOutputName(int);
 };
 

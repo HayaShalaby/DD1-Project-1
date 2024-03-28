@@ -177,8 +177,3 @@ const vector<Signal> & Circuit::getCircuitInputs()
 {
 	return Inputs;
 }
-
-const string& Circuit::getOutputName(int index)
-{
-	return Gates.at(index).output.name;
-}
