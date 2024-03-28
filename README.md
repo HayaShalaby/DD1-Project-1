@@ -26,4 +26,4 @@ The JSON file is an alternative form of the simulation file that can be used in 
 
 
 
-This repository contains: the source code, input files (including test files), the expected output and the actual output of the program, as well as visualizations for the test circuits, and finally, the report.
+This repository contains: the algorithm outline, the source code, input files (including test files), the expected output and the actual output of the program, as well as visualizations for the test circuits, and finally, the report.
