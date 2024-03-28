@@ -1,8 +1,8 @@
 # DD1-Project-1
 
-Yasmina Mahdy 900221083, 
-Rana Taher 900221430, 
-Haya Shalaby 900222031
+Yasmina Mahdy, 
+Rana Taher, 
+Haya Shalaby 
 
 
 
