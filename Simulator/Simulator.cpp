@@ -104,15 +104,15 @@ int main(int argc, char* argv[])
 
         if (argc == 1)
         {
-            cout << "Enter the path of the library file" << endl;
+            cout << "enter the path of the library file" << endl;
             getline(cin, Libfile);
-            cout << "\nEnter the path of the circuit file" << endl;
+            cout << "\nenter the path of the circuit file" << endl;
             getline(cin, circfile);
-            cout << "\nEnter the path of the stimulifile for that circuit" << endl;
+            cout << "\nenter the path of the stimulifile for that circuit" << endl;
             getline(cin, stimulifile);
-            cout << "\nEnter the path of the file you want to output the simulation to" << endl;
+            cout << "\nenter the path of the file you want to output the simulation to" << endl;
             getline(cin, simfile);
-            cout << "\nEnter the path of the JSON file you want to output to" << endl;
+            cout << "\nenter the path of the json file you want to output to" << endl;
             getline(cin, JSONfile);
         }
         // for testing purposes 
@@ -128,12 +128,12 @@ int main(int argc, char* argv[])
        
 
 
-        //Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/cells.lib";
-        //circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.cir";
-        //stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.stim";
-        //simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.sim";
-        //JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/2.json";
-        //
+        /*Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/cells.lib";
+        circfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/1.cir";
+        stimulifile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/1.stim";
+        simfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/1.sim";
+        JSONfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test/1.json";
+        */
         //"D:\University\5.Spring 2024\Digital Design\Digital Project\DD1-Project-1\Test\1.cir"
         //Libfile = "D:/University/5.Spring 2024/Digital Design/Digital Project/DD1-Project-1/Test Circuits/Library.lib";
 
@@ -222,6 +222,7 @@ int main(int argc, char* argv[])
         
 
         log = mycircuit.returnLog(); // obtains the log for the given circuit
+        int index;
 
         while(simOrder.size()!=0) // In this loop we will write the elements from the minheap to the simulation file
         {
@@ -229,19 +230,19 @@ int main(int argc, char* argv[])
             write<<test.first<<" "<<test.second.name<<" "<<test.second.value<<endl; // writes it here to the simulation file
             simOrder.pop(); // removes it from the heap
 
-
             for(int i=0; i<log->size();i++) // will iterate through the log to check which gate each input affects
             {
+                index = (*log)[i].second;
                 if(test.second.name == (*log)[i].first.name) // checks if the current element in the log has the same signal as the current top in the minheap
                 {
                     
                     bool change;
-                        mycircuit.setInput((*log)[i].second,test.second); // changes the input of the given gate
-                        change=lib.logicChange((*log)[i].second); // calculates the output of the given gate with the new change in its input
+                        mycircuit.setInput(index,test.second); // changes the input of the given gate
+                        change=lib.logicChange(index); // calculates the output of the given gate with the new change in its input
 
-                        output.first=(test.first+mycircuit.getDelay((*log)[i].second)); //the new timelapse of the changed output is calculated
-                        output.second.name=mycircuit.getOutputName((*log)[i].second); //the name of the wire taking the specific output is set
-                        output.second.value=mycircuit.getOutput((*log)[i].second).value; // the new value of the output signal is calculated
+                        output.first=(test.first+mycircuit.getDelay(index)); //the new timelapse of the changed output is calculated
+                        output.second.name=mycircuit.getOutputName(index); //the name of the wire taking the specific output is set
+                        output.second.value=mycircuit.getOutput(index).value; // the new value of the output signal is calculated
 
                        if(change) simOrder.push(output); // pushes the new element which is the output of the given gate connected to the current input that changed its output so that changed output with its timelapse which is the timelapse of its input plus the delay of the given gate plus its new value will be pushed into the minHeap (sortedOrder)
                     
@@ -251,6 +252,7 @@ int main(int argc, char* argv[])
 
         }
         write.close();
+        cout << "\nSimulation Successful!\n";
 
         JSON(simfile, JSONfile);
 
